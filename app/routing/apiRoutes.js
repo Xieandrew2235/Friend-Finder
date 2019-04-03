@@ -11,7 +11,7 @@ module.exports = function (app) {
     var friendMatch = {
       name: "",
       photo: "",
-      difference: "",
+      friendDifference: Infinity,
     };
     // Variable which will calculate difference between the user score and the score of other people in the database
     var totalDifference;
