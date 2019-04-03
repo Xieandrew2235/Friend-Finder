@@ -2,11 +2,11 @@
 var friends = require("../data/friends.js");
 
 module.exports = function (app) {
-  app.get("/api/friends.js", function (req, res) {
+  app.get("/app/data/friends.js", function (req, res) {
     res.json(friends);
   });
 // Post route, which will take the user-submitted infomation and push to the server
-  app.post("/api/friends.js", function (req, res) {
+  app.post("/app/data/friends.js", function (req, res) {
     // Object that will hold the best match for the user. Starts empty because it should be constantly updated with iterations of the for-loop
     var friendMatch = {
       name: "",
@@ -35,15 +35,15 @@ module.exports = function (app) {
         totalDifference += Math.abs(parseInt(currentUserScore) - parseInt(currentFriendScore));
       }
       // If sum of difference is less than the differences of current best match, then reset bestMatch to be the new best match
-      if (totalDifference <= bestMatch.friendDifference) {
-        bestMatch.name = currentFriend.name;
-        bestMatch.photo = currentFriend.photo;
-        bestMatch.friendDifference = totalDifference;
+      if (totalDifference <= friendMatch.friendDifference) {
+        friendMatch.name = currentFriend.name;
+        friendMatch.photo = currentFriend.photo;
+        friendMatch.friendDifference = totalDifference;
       }
     }
     // Save data to database
     friends.push(userData);
     // Return best match to user
-    res.json(bestMatch);
+    res.json(friendMatch);
   });
 };
